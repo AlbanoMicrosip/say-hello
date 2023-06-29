@@ -3,7 +3,7 @@ spring:
     name: say-hello
 
 server:
-  port: 0
+  port: 8090
 
 eureka:
   client:
