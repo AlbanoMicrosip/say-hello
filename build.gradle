@@ -1,8 +1,29 @@
-plugins {
-	id 'java'
-	id 'org.springframework.boot' version '2.3.12'
-	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+buildscript {
+	ext {
+		springBootVersion = '2.4.13'
+		dependencyManagmentVersion = '1.0.9.RELEASE'
+		microsipDockerGroup = '203593945322.dkr.ecr.us-east-1.amazonaws.com/microsip'
+		microsipBaseImage = "${microsipDockerGroup}/oracle-jdk:1.8_202"
+
+	}
+	repositories {
+		mavenCentral()
+		jcenter()
+		maven { url "http://repo.spring.io/plugins-release" }
+		maven { url "https://plugins.gradle.org/m2/" }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath "net.ltgt.gradle:gradle-apt-plugin:0.9"
+		classpath("se.transmode.gradle:gradle-docker:${gradleDockerVersion}")
+		classpath("io.spring.gradle:dependency-management-plugin:${dependencyManagmentVersion}")
+	}
 }
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: "io.spring.dependency-management"
+
 
 group = 'com.sayhello'
 version = '0.0.1-SNAPSHOT'
