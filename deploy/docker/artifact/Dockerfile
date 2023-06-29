@@ -39,10 +39,7 @@ RUN set -x \
     && export SUDO_FORCE_REMOVE=yes \
     && apt-get purge -y --auto-remove sudo \
     && apt-get clean
-ARG PORT
-ENV PORT ${PORT:-8080}
 VOLUME /tmp
-EXPOSE $PORT
 ADD src/main/docker/docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
 COPY --from=build-stage /home/microsip/microservice-build/build/libs/*.jar /app.jar
