@@ -10,6 +10,7 @@ COPY gradle gradle
 COPY \
   ./gradle \
   build.gradle \
+  gradle.properties \
   gradlew \
   ./
 
@@ -39,7 +40,7 @@ RUN set -x \
     && apt-get purge -y --auto-remove sudo \
     && apt-get clean
 ARG PORT
-ENV PORT ${PORT:-8090}
+ENV PORT ${PORT:-8080}
 VOLUME /tmp
 EXPOSE $PORT
 ADD src/main/docker/docker-entrypoint.sh /usr/local/bin/
