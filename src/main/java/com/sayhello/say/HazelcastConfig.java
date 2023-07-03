@@ -40,6 +40,8 @@ public class HazelcastConfig implements ApplicationContextAware {
     config.getNetworkConfig().getJoin().getEurekaConfig().setEnabled(true)
       .setProperty("self-registration", "true")
       .setProperty("namespace", "hazelcast");
+
+    config.getGroupConfig().setName("HAZELCAST-SAY"); // reemplaza "hazelcast-say" con el nombre de tu grupo Hazelcast si es diferente
     return config;
   }
 
