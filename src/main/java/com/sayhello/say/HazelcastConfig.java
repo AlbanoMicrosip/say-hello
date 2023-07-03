@@ -37,8 +37,7 @@ public class HazelcastConfig implements ApplicationContextAware {
   public Config configLocal() {
     Config config = new Config();
     config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
-    config.getNetworkConfig().getJoin().getEurekaConfig()
-      .setEnabled(true)
+    config.getNetworkConfig().getJoin().getEurekaConfig().setEnabled(true)
       .setProperty("self-registration", "true")
       .setProperty("namespace", "hazelcast");
     return config;
