@@ -37,20 +37,32 @@ public class HazelcastConfig implements ApplicationContextAware {
 
   @Bean
   public Config configLocal(ManagedContext managedContext, EurekaClient eurekaClient) {
-    EurekaOneDiscoveryStrategyFactory.setEurekaClient(eurekaClient);
-    Config hazelcastConfig = new Config();
+//    EurekaOneDiscoveryStrategyFactory.setEurekaClient(eurekaClient);
+//    Config hazelcastConfig = new Config();
+//
+//    hazelcastConfig.getNetworkConfig().setPort(5701);
+//    hazelcastConfig.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
+//    hazelcastConfig.getNetworkConfig().getJoin().getEurekaConfig()
+//      .setEnabled(true)
+//      .setProperty("self-registration", "true")
+//      .setProperty("namespace", "hazelcast")
+//      .setProperty("use-metadata-for-host-and-port", "true");
 
-    hazelcastConfig.getNetworkConfig().setPort(5701);
-    hazelcastConfig.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
-    hazelcastConfig.getNetworkConfig().getJoin().getEurekaConfig()
+    EurekaOneDiscoveryStrategyFactory.setEurekaClient(eurekaClient);
+    Config config = new Config();
+    config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
+    config.getNetworkConfig().getJoin().getEurekaConfig()
       .setEnabled(true)
       .setProperty("self-registration", "true")
       .setProperty("namespace", "hazelcast")
       .setProperty("use-metadata-for-host-and-port", "true");
 
-    hazelcastConfig.setManagedContext(managedContext);
+    config.setManagedContext(managedContext);
+    return config;
 
-    return hazelcastConfig;
+
+
+//    return hazelcastConfig;
   }
 
   @Bean
