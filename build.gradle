@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.4.13'
+		springBootVersion = '2.3.12.RELEASE'
 		dependencyManagmentVersion = '1.0.9.RELEASE'
 		microsipDockerGroup = '203593945322.dkr.ecr.us-east-1.amazonaws.com/microsip'
 		microsipBaseImage = "${microsipDockerGroup}/oracle-jdk:1.8_202"
@@ -36,12 +36,16 @@ repositories {
 }
 
 ext {
-	set('springCloudVersion', "2020.0.6")
+	springCloudVersion = 'Hoxton.SR12'
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	implementation 'com.hazelcast:hazelcast:3.12'
+	implementation 'com.hazelcast:hazelcast-client:3.12'
+	implementation 'com.hazelcast:hazelcast-spring:3.12'
+	implementation 'com.hazelcast:hazelcast-eureka-one:1.1.1'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
