@@ -34,30 +34,14 @@ public class HazelcastConfig implements ApplicationContextAware {
   }
 
   @Bean
-  public Config configLocal(ManagedContext managedContext, EurekaClient eurekaClient) {
-
-    EurekaOneDiscoveryStrategyFactory.setEurekaClient(eurekaClient);
+  public Config configLocal() {
     Config config = new Config();
-
-
     config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
     config.getNetworkConfig().getJoin().getEurekaConfig()
       .setEnabled(true)
       .setProperty("self-registration", "true")
-      .setProperty("namespace", "hazelcast")
-      .setProperty("use-metadata-for-host-and-port", "true");
-
-    config.setManagedContext(managedContext);
-
-    config.getManagementCenterConfig().setEnabled(true);
-    config.getManagementCenterConfig().setUrl("http://hazelm:8080/hazelcast-mancenter");
-    config.getManagementCenterConfig().setUpdateInterval(2);
-
+      .setProperty("namespace", "hazelcast");
     return config;
-
-
-
-//    return hazelcastConfig;
   }
 
   @Bean
