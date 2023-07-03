@@ -45,7 +45,7 @@ dependencies {
 	implementation 'com.hazelcast:hazelcast:3.12'
 	implementation 'com.hazelcast:hazelcast-client:3.12'
 	implementation 'com.hazelcast:hazelcast-spring:3.12'
-	implementation 'com.hazelcast:hazelcast-eureka-one:1.1.1'
+	implementation 'com.hazelcast:hazelcast-eureka-one:2.0.1'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

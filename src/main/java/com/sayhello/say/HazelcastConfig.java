@@ -13,12 +13,10 @@ import com.netflix.discovery.EurekaClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 
 import javax.annotation.PreDestroy;
 
@@ -37,16 +35,6 @@ public class HazelcastConfig implements ApplicationContextAware {
 
   @Bean
   public Config configLocal(ManagedContext managedContext, EurekaClient eurekaClient) {
-//    EurekaOneDiscoveryStrategyFactory.setEurekaClient(eurekaClient);
-//    Config hazelcastConfig = new Config();
-//
-//    hazelcastConfig.getNetworkConfig().setPort(5701);
-//    hazelcastConfig.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
-//    hazelcastConfig.getNetworkConfig().getJoin().getEurekaConfig()
-//      .setEnabled(true)
-//      .setProperty("self-registration", "true")
-//      .setProperty("namespace", "hazelcast")
-//      .setProperty("use-metadata-for-host-and-port", "true");
 
     EurekaOneDiscoveryStrategyFactory.setEurekaClient(eurekaClient);
     Config config = new Config();
