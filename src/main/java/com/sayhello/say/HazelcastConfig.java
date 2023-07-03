@@ -50,6 +50,8 @@ public class HazelcastConfig implements ApplicationContextAware {
 
     EurekaOneDiscoveryStrategyFactory.setEurekaClient(eurekaClient);
     Config config = new Config();
+
+
     config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
     config.getNetworkConfig().getJoin().getEurekaConfig()
       .setEnabled(true)
@@ -58,6 +60,11 @@ public class HazelcastConfig implements ApplicationContextAware {
       .setProperty("use-metadata-for-host-and-port", "true");
 
     config.setManagedContext(managedContext);
+
+    config.getManagementCenterConfig().setEnabled(true);
+    config.getManagementCenterConfig().setUrl("http://hazelm:8080/hazelcast-mancenter");
+    config.getManagementCenterConfig().setUpdateInterval(2);
+
     return config;
 
 
