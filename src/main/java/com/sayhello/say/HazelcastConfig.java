@@ -1,6 +1,8 @@
 package com.sayhello.say;
 
 import com.hazelcast.config.Config;
+import com.hazelcast.config.DiscoveryStrategyConfig;
+import com.hazelcast.config.JoinConfig;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.ManagedContext;
@@ -13,12 +15,15 @@ import com.netflix.discovery.EurekaClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PreDestroy;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 public class HazelcastConfig implements ApplicationContextAware {
@@ -37,12 +42,12 @@ public class HazelcastConfig implements ApplicationContextAware {
   public Config configLocal() {
     Config config = new Config();
     config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
-    config.getNetworkConfig().getJoin().getEurekaConfig().setEnabled(true)
+    config.getNetworkConfig().getJoin().getEurekaConfig()
+      .setEnabled(true)
       .setProperty("self-registration", "true")
       .setProperty("namespace", "hazelcast");
-
-    config.getGroupConfig().setName("HAZELCAST-SAY"); // reemplaza "hazelcast-say" con el nombre de tu grupo Hazelcast si es diferente
     return config;
+
   }
 
   @Bean
