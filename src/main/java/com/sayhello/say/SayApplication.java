@@ -1,5 +1,7 @@
 package com.sayhello.say;
 
+import com.hazelcast.spring.context.SpringManagedContext;
+import org.springframework.beans.BeansException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,7 +10,13 @@ import com.hazelcast.config.DiscoveryStrategyConfig;
 import com.hazelcast.config.JoinConfig;
 import com.hazelcast.eureka.one.EurekaOneDiscoveryStrategyFactory;
 import org.springframework.beans.factory.annotation.Value;
+import com.hazelcast.core.ManagedContext;
+//import com.hazelcast.core.;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 
 import java.util.HashMap;
@@ -16,7 +24,20 @@ import java.util.Map;
 
 
 @SpringBootApplication
-public class SayApplication{
+public class SayApplication implements ApplicationContextAware {
+
+	@Bean
+	public ManagedContext managedContext() {
+		ManagedContext springManagedContext = new SpringManagedContext();
+		return springManagedContext;
+	}
+
+	private ApplicationContext applicationContext;
+
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.applicationContext = applicationContext;
+	}
 
 	@Value("${hazelcast.port:5701}")
 	private int hazelcastPort;
@@ -25,7 +46,7 @@ public class SayApplication{
 	}
 
 	@Bean
-	public Config hazelcastConfig() {
+	public Config hazelcastConfig(ManagedContext managedContext) {
 		Config config = new Config();
 
 		config.getManagementCenterConfig().setEnabled(true);
@@ -45,6 +66,8 @@ public class SayApplication{
 		properties.put("namespace", "hazelcast");
 		DiscoveryStrategyConfig discoveryStrategyConfig = new DiscoveryStrategyConfig(discoveryStrategyFactory, properties);
 		joinConfig.getDiscoveryConfig().addDiscoveryStrategyConfig(discoveryStrategyConfig);
+
+		config.setManagedContext(managedContext);
 
 		return config;
 	}
