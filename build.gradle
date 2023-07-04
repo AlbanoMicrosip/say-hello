@@ -40,11 +40,11 @@ ext {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
+//	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 	implementation 'com.hazelcast:hazelcast:3.12'
 //	implementation 'com.hazelcast:hazelcast-client:3.12'
-//	implementation 'com.hazelcast:hazelcast-spring:3.12'
+	implementation 'com.hazelcast:hazelcast-spring:3.12'
 	implementation 'com.hazelcast:hazelcast-eureka-one:1.1.2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
