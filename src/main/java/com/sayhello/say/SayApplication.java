@@ -27,6 +27,11 @@ public class SayApplication{
 	@Bean
 	public Config hazelcastConfig() {
 		Config config = new Config();
+
+		config.getManagementCenterConfig().setEnabled(true);
+		config.getManagementCenterConfig().setUrl("http://hazelm:8080/hazelcast-mancenter");
+		config.getManagementCenterConfig().setUpdateInterval(2);
+
 		config.getNetworkConfig().setPort(hazelcastPort);
 		config.getNetworkConfig().setPortAutoIncrement(true);
 		config.getProperties().setProperty("hazelcast.discovery.enabled", "true");
