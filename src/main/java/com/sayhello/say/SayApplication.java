@@ -1,6 +1,8 @@
 package com.sayhello.say;
 
 import com.hazelcast.config.UserCodeDeploymentConfig;
+import com.hazelcast.core.Hazelcast;
+import com.hazelcast.instance.HazelcastInstanceFactory;
 import com.hazelcast.spring.context.SpringManagedContext;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.SpringApplication;
@@ -20,6 +22,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 
+import javax.annotation.PreDestroy;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,12 +79,18 @@ public class SayApplication implements ApplicationContextAware {
 
 		UserCodeDeploymentConfig userCodeDeploymentConfig = new UserCodeDeploymentConfig();
 		userCodeDeploymentConfig.setEnabled(true)
-			.setClassCacheMode(UserCodeDeploymentConfig.ClassCacheMode.ETERNAL)
+			.setClassCacheMode(ETERNAL)
 			.setProviderMode(LOCAL_AND_CACHED_CLASSES);
 
 		config.setUserCodeDeploymentConfig(userCodeDeploymentConfig);
 
 		return config;
+	}
+
+	@PreDestroy
+	void destroyHazelcast() {
+		Hazelcast.shutdownAll();
+		HazelcastInstanceFactory.shutdownAll();
 	}
 
 }
