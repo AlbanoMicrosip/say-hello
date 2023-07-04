@@ -1,3 +1,8 @@
 spring:
   application:
     name: Say-instance
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
