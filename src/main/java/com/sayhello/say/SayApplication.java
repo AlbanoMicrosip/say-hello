@@ -8,6 +8,7 @@ import com.hazelcast.config.DiscoveryStrategyConfig;
 import com.hazelcast.config.JoinConfig;
 import com.hazelcast.eureka.one.EurekaOneDiscoveryStrategyFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import java.util.Map;
 
 
 @SpringBootApplication
+@EnableDiscoveryClient
 public class SayApplication{
 
 	@Value("${hazelcast.port:5701}")
