@@ -24,7 +24,6 @@ public class SayApplication{
 		SpringApplication.run(SayApplication.class, args);
 	}
 
-
 	@Bean
 	public Config hazelcastConfig() {
 		Config config = new Config();
