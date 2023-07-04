@@ -17,43 +17,9 @@ import java.util.Random;
 
 @RestController
 @SpringBootApplication
-@EnableDiscoveryClient
-public class SayApplication implements SaludoController{
-
-	@Value("${spring.application.name}")
-	private String appName;
-	private static Logger log = LoggerFactory.getLogger(SayApplication.class);
-
+public class SayApplication{
 	public static void main(String[] args) {
 		SpringApplication.run(SayApplication.class, args);
-	}
-
-	@GetMapping("/greeting")
-	public String greet() {
-		log.info("Access /greeting");
-
-		List<String> greetings = Arrays.asList("Hi there", "Greetings", "Salutations");
-		Random rand = new Random();
-
-		int randomNum = rand.nextInt(greetings.size());
-		return greetings.get(randomNum);
-	}
-
-	@GetMapping("/")
-	public String home() {
-		log.info("Access /");
-		return "Hi!";
-	}
-
-	@Override
-	public String saludo() {
-		log.info("Access /saludo");
-
-		List<String> greetings = Arrays.asList("Hi there", "Greetings", "Salutations");
-		Random rand = new Random();
-
-		int randomNum = rand.nextInt(greetings.size());
-		return greetings.get(randomNum);
 	}
 
 }
