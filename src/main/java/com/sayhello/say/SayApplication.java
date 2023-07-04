@@ -1,5 +1,6 @@
 package com.sayhello.say;
 
+import com.hazelcast.config.UserCodeDeploymentConfig;
 import com.hazelcast.spring.context.SpringManagedContext;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.SpringApplication;
@@ -22,6 +23,8 @@ import org.springframework.context.annotation.Bean;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.hazelcast.config.UserCodeDeploymentConfig.ClassCacheMode.ETERNAL;
+import static com.hazelcast.config.UserCodeDeploymentConfig.ProviderMode.LOCAL_AND_CACHED_CLASSES;
 
 @SpringBootApplication
 public class SayApplication implements ApplicationContextAware {
@@ -67,7 +70,16 @@ public class SayApplication implements ApplicationContextAware {
 		DiscoveryStrategyConfig discoveryStrategyConfig = new DiscoveryStrategyConfig(discoveryStrategyFactory, properties);
 		joinConfig.getDiscoveryConfig().addDiscoveryStrategyConfig(discoveryStrategyConfig);
 
+
+
 		config.setManagedContext(managedContext);
+
+		UserCodeDeploymentConfig userCodeDeploymentConfig = new UserCodeDeploymentConfig();
+		userCodeDeploymentConfig.setEnabled(true)
+			.setClassCacheMode(UserCodeDeploymentConfig.ClassCacheMode.ETERNAL)
+			.setProviderMode(LOCAL_AND_CACHED_CLASSES);
+
+		config.setUserCodeDeploymentConfig(userCodeDeploymentConfig)
 
 		return config;
 	}
