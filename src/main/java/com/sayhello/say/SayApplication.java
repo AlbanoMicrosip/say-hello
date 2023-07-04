@@ -16,7 +16,6 @@ import java.util.Map;
 
 
 @SpringBootApplication
-@EnableDiscoveryClient
 public class SayApplication{
 
 	@Value("${hazelcast.port:5701}")
