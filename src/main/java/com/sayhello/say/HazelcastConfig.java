@@ -1,6 +1,5 @@
 package com.sayhello.say;
 
-import com.hazelcast.client.config.ClientConfig;
 import com.hazelcast.config.Config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
