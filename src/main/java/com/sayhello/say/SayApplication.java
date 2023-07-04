@@ -27,6 +27,7 @@ public class SayApplication{
 	public Config hazelcastConfig() {
 		Config config = new Config();
 		config.getNetworkConfig().setPort(hazelcastPort);
+		config.getNetworkConfig().setPortAutoIncrement(true);
 		config.getProperties().setProperty("hazelcast.discovery.enabled", "true");
 
 		JoinConfig joinConfig = config.getNetworkConfig().getJoin();
