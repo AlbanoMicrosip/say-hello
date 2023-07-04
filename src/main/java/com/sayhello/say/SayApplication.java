@@ -79,7 +79,7 @@ public class SayApplication implements ApplicationContextAware {
 			.setClassCacheMode(UserCodeDeploymentConfig.ClassCacheMode.ETERNAL)
 			.setProviderMode(LOCAL_AND_CACHED_CLASSES);
 
-		config.setUserCodeDeploymentConfig(userCodeDeploymentConfig)
+		config.setUserCodeDeploymentConfig(userCodeDeploymentConfig);
 
 		return config;
 	}
