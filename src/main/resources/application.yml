@@ -1,6 +1,6 @@
 spring:
   application:
-    name: Say-instance
+    name: SAY-INSTANCE
 
 eureka:
   client:
